@@ -43,32 +43,43 @@ if __name__ == "__main__":
     for i in range(len(idk)):
         print(idk[i])
 
-    for i in range(len(idk[0])-1,0,-1):
+    for i in range(len(idk[0]),0,-1):
         new_col = True
-        base = 10 
-        for j in range(len(idk)-1):
+        for j in range(len(idk)):
             print(idk[j][i-1], i , j)
             if idk[j][i-1].isdigit():
-                number = number * base + int(idk[j][i-1])
-                base *= 10
+                number = number * 10 + int(idk[j][i-1])
                 new_col = False
-            else:
+            elif idk[j][i-1] is '*' or idk[j][i-1] is '+':
+                print ("found znak:", idk[j][i-1])
                 znamenko = idk[j][i-1]
 
         if not new_col:
             the_numbers.append(number)
             number = 0
+            print("the_numbers:", the_numbers)
         else:
+            print("znamenko:", znamenko)
             if znamenko == '+':
                 answer2 += sum(the_numbers)
+                print("sum:", sum(the_numbers))
             elif znamenko == '*':
                 prod = 1
                 for num in the_numbers:
                     prod *= num
                 answer2 += prod
+                print("prod:", prod)
             the_numbers = []
             znamenko = ''
-
+    if znamenko == '+':
+        answer2 += sum(the_numbers)
+        print("sum:", sum(the_numbers))
+    elif znamenko == '*':
+        prod = 1
+        for num in the_numbers:
+            prod *= num
+        answer2 += prod
+        print("prod:", prod)
 
         
     
